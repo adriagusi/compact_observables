@@ -56,6 +56,9 @@ ser = serial.Serial(
     bytesize=serial.EIGHTBITS, \
     timeout=1)
 
+# -------------------------------------------------------------------
+## READ DATA FROM RECEIVER
+
 # Restart receiver in COLD mode
 ser.write("$PSTMCOLD\r".encode())
 print('Receiver started in cold mode')
@@ -101,6 +104,9 @@ for idx in range(0, n_lines):
 
 ser.close()
 
+# -------------------------------------------------------------------
+## COMPUTE TOW AND PSEUDORANGE
+
 # Compute time of week (TOW)
 tow = float(time_message[PSTMTG_IDX['TOW']])
 tow_delta = float(time_message[PSTMTG_IDX['tow_delta']])
@@ -130,6 +136,8 @@ for idx, message in enumerate(obs_message_list):
     obs_array[idx, 2] = cn0
 
 
+# -------------------------------------------------------------------
+## COMPACT GNSS DATA TO 20 BYTES PAYLOAD
 # Encode observables to 20 bytes
 # Order observable array by CN0 and filter first MAX_SAT satellites
 obs_array = obs_array[obs_array[:, 2].argsort()[::-1]][:MAX_SAT]
