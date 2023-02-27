@@ -217,8 +217,8 @@ for idx in range(0, MAX_SAT):
 # Encode MSM5 message
 decoded_rtcm_bin = encode_msm(gps_decoded_list, MsmType.MSM5, 0, decoded_tow_milliseconds)
 # Define NTRIP Caster
-caster_albaspot_lite = Caster("caster.demo.albaspot.albora.xyz", 2101, Credentials("adria01", "AlbaspotCaster2021"))
+caster_albaspot_lite = Caster("caster.mwc.albaspot.albora.xyz", 2101, Credentials("st01", "Albora+23"))
 # Sent RTCM data to caster
-send(decoded_rtcm_bin, "adria01", caster_albaspot_lite)
+send(decoded_rtcm_bin, "st01", caster_albaspot_lite)
 
 
